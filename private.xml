@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <replacementdef>
+        <replacementname>HyperModifierFlag</replacementname>
+        <replacementvalue>ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L| ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_L</replacementvalue>
+    </replacementdef>
+
+    <!-- 将capslock定义为hyper键,单击此键触发ESC, 组合键映射到下面的hyper+key的定义 -->
+    <item>
+        <name>定义hyper</name>
+        <identifier>private.capslock.def</identifier>
+        <autogen>
+            --KeyOverlaidModifier--
+            KeyCode::F19,
+            KeyCode::CONTROL_L,
+            ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::COMMAND_L,
+            KeyCode::ESCAPE
+        </autogen>
+    </item>
+    
+    <item>
+        <name>hyper + key </name>        
+        <identifier>private.hyper_key.def</identifier>
+        <!-- 使用capslock + h j k l 实现方向键 -->
+        <autogen>--KeyToKey-- KeyCode::H, {{HyperModifierFlag}}, KeyCode::CURSOR_LEFT </autogen>
+        <autogen>--KeyToKey-- KeyCode::J, {{HyperModifierFlag}}, KeyCode::CURSOR_DOWN </autogen>
+        <autogen>--KeyToKey-- KeyCode::K, {{HyperModifierFlag}}, KeyCode::CURSOR_UP   </autogen>
+        <autogen>--KeyToKey-- KeyCode::L, {{HyperModifierFlag}}, KeyCode::CURSOR_RIGHT</autogen>
+
+        <!-- capslock + 空格 实现原有的大定锁定键功能 -->
+        <autogen>--KeyToKey-- KeyCode::SPACE,{{HyperModifierFlag}}, KeyCode::CAPSLOCK </autogen> 
+    </item>
+</root>
